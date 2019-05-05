@@ -10,9 +10,6 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.0.6"
 
 libraryDependencies += "commons-codec" % "commons-codec" % "1.12"
 
-// https://mvnrepository.com/artifact/org.apache.commons/commons-io
-libraryDependencies += "org.apache.commons" % "commons-io" % "1.3.2"
-
 // https://mvnrepository.com/artifact/commons-io/commons-io
 libraryDependencies += "commons-io" % "commons-io" % "2.6"
 
