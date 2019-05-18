@@ -1,4 +1,4 @@
-name := "CommonUtil"
+name := "ScalaUtils"
 
 version := "0.1"
 
