@@ -1,8 +1,8 @@
-package org.sh.utils.common.file
+package org.sh.utils.file
 
 import prop.util.EncPropUtil._
 import prop.PropFileInfo._
-import org.sh.utils.common.file.prop.PropDataStructures._
+import org.sh.utils.file.prop.PropDataStructures._
 //////////////////////////////////////////////
 
 object MissingPropUtil {      
@@ -17,7 +17,7 @@ object MissingPropUtil {
     val $info$ = """Returns the property files loaded by the app till now. Not all files may be loaded. A file is loaded when code accessing it is first executed. 
 If the code is never executed, the file will not be loaded. Also, just because the file is not loaded now does not mean it will not be loaded in future.
 To get all files (not just loaded ones), use the methods 
-<u><a href='#org.sh.utils.common.file.EncryptedPropUtil.getAllPlaintextFiles'>EncryptedPropUtil.getAllPlaintextFiles</a></u> and <u><a href='#org.sh.utils.common.file.EncryptedPropUtil.getAllEncryptedFiles'>EncryptedPropUtil.getAllEncryptedFiles</a></u>."""
+<u><a href='#org.sh.utils.file.EncryptedPropUtil.getAllPlaintextFiles'>EncryptedPropUtil.getAllPlaintextFiles</a></u> and <u><a href='#org.sh.utils.file.EncryptedPropUtil.getAllEncryptedFiles'>EncryptedPropUtil.getAllEncryptedFiles</a></u>."""
     existingFiles.map{case (fileName, isEncrypted) =>
       FileInfo(fileName, isEncrypted)
     }.toArray

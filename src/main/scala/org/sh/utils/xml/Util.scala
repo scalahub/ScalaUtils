@@ -1,5 +1,5 @@
 
-package org.sh.utils.common.xml
+package org.sh.utils.xml
 
 //import java.io.BufferedInputStream
 //import java.io.BufferedOutputStream
@@ -11,8 +11,8 @@ import java.io.InputStreamReader
 import scala.xml.Node
 import scala.xml.NodeSeq
 import scala.xml.XML
-import org.sh.utils.common.Util._
-import org.sh.utils.common.file.Util._
+import org.sh.utils.Util._
+import org.sh.utils.file.Util._
 object Util {
  
   def getAttributeText(xml:NodeSeq, attrName:String) = {

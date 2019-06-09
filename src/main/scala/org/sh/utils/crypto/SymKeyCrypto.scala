@@ -1,15 +1,15 @@
 package org.sh.utils.crypto
 
 import Util._
-import org.sh.utils.common.file.TraitFilePropertyReader
-import org.sh.utils.common.encoding.Base64
-import org.sh.utils.common.encoding.Hex
+import org.sh.utils.file.TraitFilePropertyReader
+import org.sh.utils.encoding.Base64
+import org.sh.utils.encoding.Hex
 import javax.crypto.spec.SecretKeySpec
 import java.security.Security
 import javax.crypto.Cipher
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 //import sun.misc.BASE64Decoder
-import org.sh.utils.common.Util._
+import org.sh.utils.Util._
 
 private object SymKeyCryptoUtil extends TraitFilePropertyReader {
   def generateAes128KeyHex = Hex.encodeBytes(strongRandomBytes(16)) // 128 bits = 16 bytes

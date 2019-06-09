@@ -1,8 +1,8 @@
-package org.sh.utils.common.file.prop
+package org.sh.utils.file.prop
 
 import java.io.{InputStream => IS}
 import java.io.{OutputStream => OS}
-import org.sh.utils.common.Util.sha256
+import org.sh.utils.Util.sha256
 
 object GlobalEncryptorDecryptor  {
   

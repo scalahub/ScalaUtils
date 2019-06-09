@@ -1,4 +1,4 @@
-package org.sh.utils.common.encoding
+package org.sh.utils.encoding
 
 import org.apache.commons.codec.binary.{Base64 => B64}
 

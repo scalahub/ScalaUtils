@@ -1,7 +1,7 @@
 package org.sh.utils.crypto
 
-import org.sh.utils.common.encoding.Base64
-import org.sh.utils.common.file.TraitFilePropertyReader
+import org.sh.utils.encoding.Base64
+import org.sh.utils.file.TraitFilePropertyReader
 
 object PubKeyEncryptor extends TraitFilePropertyReader {
   lazy val propertyFile = "pubKeyEncryption.properties"

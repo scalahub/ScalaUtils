@@ -1,4 +1,4 @@
-package org.sh.utils.common.servlet
+package org.sh.utils.servlet
 
 import javax.servlet.http.{HttpServlet, HttpServletRequest => HSReq, HttpServletResponse => HSResp}
 

@@ -1,6 +1,6 @@
 
 
-package org.sh.utils.common.file
+package org.sh.utils.file
 
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
@@ -15,7 +15,7 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.PrintWriter
 import org.apache.commons.io.FileUtils
-import org.sh.utils.common.Util._
+import org.sh.utils.Util._
 object Util {
 
   /**

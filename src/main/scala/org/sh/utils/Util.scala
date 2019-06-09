@@ -1,11 +1,11 @@
-package org.sh.utils.common
+package org.sh.utils
 
 import java.io._
 import java.sql.Date
 import java.text.SimpleDateFormat
 
-import org.sh.utils.common.encoding.Base64
-import org.sh.utils.common.file.TraitPlaintextFileProperties
+import org.sh.utils.encoding.Base64
+import org.sh.utils.file.TraitPlaintextFileProperties
 //import scala.concurrent.Future
 //import scala.concurrent.ExecutionContext.Implicits.global
 import java.util.concurrent.atomic.AtomicLong

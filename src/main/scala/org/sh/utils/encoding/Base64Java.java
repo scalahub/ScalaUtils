@@ -1,4 +1,4 @@
-package org.sh.utils.common.encoding;
+package org.sh.utils.encoding;
 
 /**
  * <p>Encodes and decodes to and from Base64 notation.</p>

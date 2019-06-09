@@ -1,7 +1,7 @@
 
-package org.sh.utils.common.file.prop
+package org.sh.utils.file.prop
 
-import org.sh.utils.common.json.JSONUtil.JsonFormatted
+import org.sh.utils.json.JSONUtil.JsonFormatted
 
 object PropDataStructures {
   case class PropVal(key:String, value:Any) extends JsonFormatted {

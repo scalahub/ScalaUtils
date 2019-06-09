@@ -1,4 +1,4 @@
-package org.sh.utils.common
+package org.sh.utils
 
 import scala.collection.immutable.Queue
 import scala.collection.mutable.{Queue => MQueue}

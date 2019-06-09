@@ -1,4 +1,4 @@
-package org.sh.utils.common.file.prop
+package org.sh.utils.file.prop
 
 //import java.io.FileInputStream
 import java.io.FileInputStream
@@ -7,12 +7,12 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.util.Properties
 
-import org.sh.utils.common.file.prop.util.EncPropUtil
-import org.sh.utils.common.file.Util
-import org.sh.utils.common.file.Util._
-import org.sh.utils.common.Util._
-import org.sh.utils.common.file.Util
-import org.sh.utils.common.file.prop.util.EncPropUtil
+import org.sh.utils.file.prop.util.EncPropUtil
+import org.sh.utils.file.Util
+import org.sh.utils.file.Util._
+import org.sh.utils.Util._
+import org.sh.utils.file.Util
+import org.sh.utils.file.prop.util.EncPropUtil
 
 object PropFileInfo {
   var existingFiles:Map[String, Boolean] = Map() // fileName -> isEncrypted
@@ -27,7 +27,7 @@ trait TraitCommonFilePropReader {
   val showDefaultValues : Boolean
   // createDir(propertyDirectory)
   val isEncrypted:Boolean
-  protected [common] def fileExists = Util.fileExists(fullFileName)// existingFiles.contains(fullFileName)
+  protected [utils] def fileExists = Util.fileExists(fullFileName)// existingFiles.contains(fullFileName)
   private def actualFileName = propertyFile+(if (isEncrypted) "."+encrExtension else "")
   def fullFileName : String = propertyDirectory + "/" +actualFileName   // System.getProperty("file.separator")
   override def toString = fullFileName

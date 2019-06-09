@@ -1,4 +1,4 @@
-package org.sh.utils.common.file.prop
+package org.sh.utils.file.prop
 
 import java.io.{InputStream => IS}
 import java.io.{OutputStream => OS}
@@ -14,7 +14,7 @@ import javax.crypto.spec.IvParameterSpec;import javax.crypto.spec.SecretKeySpec
 // http://stackoverflow.com/a/15922832/243233
 class EncryptorDecryptor(private val secretKey:String, private val iv:String) {
   if (secretKey.size != 16 || iv.size != 16) 
-    throw new Exception("incorrect HOMEDIR [org.sh.utils.common]")
+    throw new Exception("incorrect HOMEDIR [org.sh.utils]")
   val CIPHER_MODE = "AES/CFB8/NoPadding";
   val CHARSET = Charset.forName("UTF8");
   val keySpec = new SecretKeySpec(secretKey.getBytes(CHARSET), "AES");

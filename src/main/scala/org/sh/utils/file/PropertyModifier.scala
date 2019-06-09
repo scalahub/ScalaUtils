@@ -1,9 +1,9 @@
-package org.sh.utils.common.file
+package org.sh.utils.file
 
 import prop.util.EncPropUtil._
 import prop.PropFileInfo._
-import org.sh.utils.common.file.{PlaintextFileProperties => PF}
-import org.sh.utils.common.file.prop.TraitCommonFilePropReader
+import org.sh.utils.file.{PlaintextFileProperties => PF}
+import org.sh.utils.file.prop.TraitCommonFilePropReader
 import prop.GlobalEncryptorDecryptor._
 
 object PropertyModifierUtil extends TraitFilePropertyReader {
@@ -30,7 +30,7 @@ object PropertyModifier {
     getPropsIfExists(getEncProp(fileName, secret))
   }
   def getEncryptedPropsDefaultSecret(fileName:String, masterPassword:String) = usingMasterPassword(masterPassword){
-    val $info$ = """As <u><a href='#org.sh.utils.common.file.PropertyModifier.getEncryptedProps'>getEncryptedProps</a></u> but uses default secret. DO NOT ADD .enc FILE EXTENSION. USE THE PLAINTEXT FILE NAME."""
+    val $info$ = """As <u><a href='#org.sh.utils.file.PropertyModifier.getEncryptedProps'>getEncryptedProps</a></u> but uses default secret. DO NOT ADD .enc FILE EXTENSION. USE THE PLAINTEXT FILE NAME."""
     getEncryptedProps(fileName, getDefaultLocalSecret)
   }
   def addOrModifyPlaintextProp(fileName:String, propName:String, propValue:String, comment:String, masterPassword:String) = usingMasterPassword(masterPassword){
@@ -44,7 +44,7 @@ object PropertyModifier {
     addOrModifyProp(propName, propValue, comment, p)
   }  
   def addOrModifyEncryptedPropDefaultSecret(fileName:String, propName:String, propValue:String, comment:String, masterPassword:String) = usingMasterPassword(masterPassword){
-    val $info$ = """As <u><a href='#org.sh.utils.common.file.PropertyModifier.addOrModifyEncryptedProp'>addOrModifyEncryptedProp</a></u> but uses default secret. DO NOT ADD .enc FILE EXTENSION. USE THE PLAINTEXT FILE NAME."""
+    val $info$ = """As <u><a href='#org.sh.utils.file.PropertyModifier.addOrModifyEncryptedProp'>addOrModifyEncryptedProp</a></u> but uses default secret. DO NOT ADD .enc FILE EXTENSION. USE THE PLAINTEXT FILE NAME."""
     addOrModifyEncryptedProp(fileName:String, propName:String, propValue:String, comment:String, getDefaultLocalSecret) 
   }
 }

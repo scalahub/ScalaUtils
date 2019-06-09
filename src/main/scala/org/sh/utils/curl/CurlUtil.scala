@@ -1,6 +1,6 @@
-package org.sh.utils.common.curl
+package org.sh.utils.curl
 
-import org.sh.utils.common.Util._
+import org.sh.utils.Util._
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.ArrayList
@@ -14,11 +14,11 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClients
 import org.apache.http.message.BasicNameValuePair
 import org.apache.http.util.EntityUtils
-import org.sh.utils.common.json.JSONUtil
+import org.sh.utils.json.JSONUtil
 
 import scala.xml.XML
 
-object CurlAlt {
+object Curl {
 
   val defaultUserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1"     
 
@@ -80,32 +80,32 @@ object CurlAlt {
   }
 
   // wrapper 1 around main curl
-  def curl(s:String, headers:Array[(String, String)], reqType:String):String = 
-      curl(s, headers, reqType, Array[(String, String)]())
+  def curl(url:String, headers:Array[(String, String)], reqType:String):String =
+      curl(url, headers, reqType, Array[(String, String)]())
 
   // wrapper 2 around wrapper 1
-  def curl(s:String, headers:Array[(String, String)]):String = 
-      curl(s, headers, get) 
+  def curl(url:String, headers:Array[(String, String)]):String =
+      curl(url, headers, get)
 
   // wrapper 3 around wrapper 2
   def curl(url:String):String = 
       curl(url, Array[(String, String)]())
   
   // wrapper 4 around wrapper 3
-  def query(s:String, headers:Array[(String, String)]):String = 
-      curl(s, headers) 
+  def query(url:String, headers:Array[(String, String)]):String =
+      curl(url, headers)
 
   // wrapper 5 around wrapper 4
-  def query(s:String):String = 
-      query(s,Array[(String, String)]()) 
+  def query(url:String):String =
+      query(url,Array[(String, String)]())
 
   // wrapper 6 around wrapper 5
-  def queryXML(s:String) = JSONUtil.jsonStringToXML(query(s))
-  def queryXML(s:String, headers:Array[(String, String)]) = JSONUtil.jsonStringToXML(query(s, headers))
-  def queryDirectXML(s:String) = XML.loadString(query(s))
+  def queryXML(url:String) = JSONUtil.jsonStringToXML(query(url))
+  def queryXML(url:String, headers:Array[(String, String)]) = JSONUtil.jsonStringToXML(query(url, headers))
+  def queryDirectXML(url:String) = XML.loadString(query(url))
 }
 
-object CurlJsonDataAlt {
+object CurlJsonData {
   // https://stackoverflow.com/questions/12059278/how-to-post-json-request-using-apache-httpclient
   // https://stackoverflow.com/questions/13743205/how-to-add-set-and-get-header-in-request-of-httpclient
   def curl(url:String, jsonEncodedString:String) = {
@@ -124,7 +124,7 @@ object CurlJsonDataAlt {
           }
         }
         EntityUtils.consume(entity)
-        println("ANSWER -> "+answer)
+        //println("ANSWER -> "+answer)
         answer
       }
     }

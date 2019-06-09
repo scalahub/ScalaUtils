@@ -1,7 +1,7 @@
-package org.sh.utils.common.cache
+package org.sh.utils.cache
 
 import scala.util.Random._
-import org.sh.utils.common.Util._
+import org.sh.utils.Util._
 import scala.collection.immutable.TreeMap
 //import scala.collection.mutable.{Map => MMap}  
 //import scala.collection.immutable.{Map => MMap}  

@@ -1,7 +1,7 @@
 package org.sh.utils.crypto
 
-import org.sh.utils.common.encoding.Hex
-import org.sh.utils.common.encoding.Base64
+import org.sh.utils.encoding.Hex
+import org.sh.utils.encoding.Base64
 
 object TestSymKeyCrypto extends App {
   val key = SymKeyCryptoUtil.generateAes128KeyHex
@@ -48,11 +48,11 @@ object TestKeyGen extends App {
     val pubEncodedStr = Base64.encodeBytes(pubEncoded)
     val prvEncoded = prv.getEncoded
     val prvEncodedStr = Base64.encodeBytes(prvEncoded)
-    val randomString = org.sh.utils.common.Util.randomAlphanumericString(10)
+    val randomString = org.sh.utils.Util.randomAlphanumericString(10)
     val pubKeyFile = s"pubKey_$randomString.txt"
     val prvKeyFile = s"prvKey_$randomString.txt"
-    org.sh.utils.common.file.Util.writeToTextFile(pubKeyFile, pubEncodedStr)
-    org.sh.utils.common.file.Util.writeToTextFile(prvKeyFile, prvEncodedStr)
+    org.sh.utils.file.Util.writeToTextFile(pubKeyFile, pubEncodedStr)
+    org.sh.utils.file.Util.writeToTextFile(prvKeyFile, prvEncodedStr)
     println ("Public key written to: "+pubKeyFile)
     println ("Private key written to: "+prvKeyFile)
   }

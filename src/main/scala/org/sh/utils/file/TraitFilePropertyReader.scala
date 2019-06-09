@@ -1,12 +1,12 @@
 
-package org.sh.utils.common.file
+package org.sh.utils.file
 
-import org.sh.utils.common.file.prop._
-import org.sh.utils.common.file.prop.GlobalEncryptorDecryptor._
+import org.sh.utils.file.prop._
+import org.sh.utils.file.prop.GlobalEncryptorDecryptor._
 import java.io.{InputStream => IS}
 import java.io.{OutputStream => OS}
 
-import org.sh.utils.common.file.prop.{EncryptorDecryptor, TraitCommonFilePropReader}
+import org.sh.utils.file.prop.{EncryptorDecryptor, TraitCommonFilePropReader}
 
 trait TraitFilePropertyReader extends TraitCommonFilePropReader {
   val isEncrypted:Boolean = isEncryptionEnabled

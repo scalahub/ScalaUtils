@@ -1,4 +1,4 @@
-package org.sh.utils.common.file
+package org.sh.utils.file
 
 import prop.util.EncPropUtil._
 import prop.PropFileInfo._
@@ -55,19 +55,19 @@ None of the target files should exist. This will create new file(s) in the same 
   }
   
   def decryptValidEncryptedFilesDefaultSecret(token:String) = {
-    val $info$ = """As <u><a href='#org.sh.utils.common.file.EncryptedPropUtil.decryptValidEncryptedFiles'>decryptValidEncryptedFiles</a></u> but uses default secret. To prevent accidental clicking, a token is required. The token is 83y4ufdhj8uhf3iqnj"""
+    val $info$ = """As <u><a href='#org.sh.utils.file.EncryptedPropUtil.decryptValidEncryptedFiles'>decryptValidEncryptedFiles</a></u> but uses default secret. To prevent accidental clicking, a token is required. The token is 83y4ufdhj8uhf3iqnj"""
     if (token == "83y4ufdhj8uhf3iqnj") decryptValidEncryptedFiles(getDefaultLocalSecret) else invalidPasswordException
   }
   def encryptAllPlaintextFilesDefaultSecret(token:String) = {
-    val $info$ = """As <u><a href='#org.sh.utils.common.file.EncryptedPropUtil.encryptAllPlaintextFiles'>encryptAllPlaintextFiles</a></u> but uses default secret. To prevent accidental clicking, a token is required. The token is 83y4ufdhj8uhf3iqnj"""
+    val $info$ = """As <u><a href='#org.sh.utils.file.EncryptedPropUtil.encryptAllPlaintextFiles'>encryptAllPlaintextFiles</a></u> but uses default secret. To prevent accidental clicking, a token is required. The token is 83y4ufdhj8uhf3iqnj"""
     if (token == "83y4ufdhj8uhf3iqnj") encryptAllPlaintextFiles(getDefaultLocalSecret) else invalidPasswordException
   }
   def encryptPlaintextFileDefaultSecret(fileName:String) = {
-    val $info$ = """As <u><a href='#org.sh.utils.common.file.EncryptedPropUtil.encryptPlaintextFile'>encryptPlaintextFile</a></u> but uses default secret. DO NOT ADD .enc FILE EXTENSION. USE THE PLAINTEXT FILE NAME."""
+    val $info$ = """As <u><a href='#org.sh.utils.file.EncryptedPropUtil.encryptPlaintextFile'>encryptPlaintextFile</a></u> but uses default secret. DO NOT ADD .enc FILE EXTENSION. USE THE PLAINTEXT FILE NAME."""
     encryptPlaintextFile(fileName, getDefaultLocalSecret)
   }
   def decryptEncryptedFileDefaultSecret(fileName:String) = {
-    val $info$ = """As <u><a href='#org.sh.utils.common.file.EncryptedPropUtil.decryptEncryptedFile'>decryptEncryptedFile</a></u> but uses default secret. DO NOT ADD .enc FILE EXTENSION. USE THE PLAINTEXT FILE NAME."""
+    val $info$ = """As <u><a href='#org.sh.utils.file.EncryptedPropUtil.decryptEncryptedFile'>decryptEncryptedFile</a></u> but uses default secret. DO NOT ADD .enc FILE EXTENSION. USE THE PLAINTEXT FILE NAME."""
     decryptEncryptedFile(fileName, getDefaultLocalSecret)
   }
       
@@ -81,7 +81,7 @@ None of the target files should exist. This will create new file(s) in the same 
   }
   
   def getValidEncryptedFilesDefaultSecret = {
-    val $info$ = """As <u><a href='#org.sh.utils.common.file.EncryptedPropUtil.getValidEncryptedFiles'>getValidEncryptedFiles</a></u> but uses default secret."""
+    val $info$ = """As <u><a href='#org.sh.utils.file.EncryptedPropUtil.getValidEncryptedFiles'>getValidEncryptedFiles</a></u> but uses default secret."""
     getValidEncryptedFiles(getDefaultLocalSecret)
   }
   def getAllPlaintextFiles = {

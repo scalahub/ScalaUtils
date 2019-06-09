@@ -1,10 +1,10 @@
-package org.sh.utils.common.json
+package org.sh.utils.json
 
-import org.sh.utils.common.Util
+import org.sh.utils.Util
 import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONTokener
-import org.sh.utils.common.Util
+import org.sh.utils.Util
 
 import scala.collection.JavaConversions._
 object JSONUtil {
@@ -41,7 +41,7 @@ object JSONUtil {
   //      
   //      val value = vals.apply(i) match {
   //        //case a:Set[_] => a.map(_.toString).toArray
-  //        case any:AnyRef => org.sh.utils.common.Util.serialize(any)
+  //        case any:AnyRef => org.sh.utils.Util.serialize(any)
   //        case any => any
   //      }
   //      

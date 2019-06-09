@@ -1,13 +1,13 @@
 
-package org.sh.utils.common.file.prop.util
+package org.sh.utils.file.prop.util
 
 import java.io.File
 
-import org.sh.utils.common.file.prop.PropDataStructures.PropVal
+import org.sh.utils.file.prop.PropDataStructures.PropVal
 
 import scala.collection.JavaConversions._
-import org.sh.utils.common.file.prop.{GlobalEncryptorDecryptor, TraitCommonFilePropReader}
-import org.sh.utils.common.file.{EncryptedFileProperties, TraitPlaintextFileProperties}
+import org.sh.utils.file.prop.{GlobalEncryptorDecryptor, TraitCommonFilePropReader}
+import org.sh.utils.file.{EncryptedFileProperties, TraitPlaintextFileProperties}
 
 object EncPropUtil {
   import GlobalEncryptorDecryptor._
