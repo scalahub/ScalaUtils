@@ -14,6 +14,7 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClients
 import org.apache.http.message.BasicNameValuePair
 import org.apache.http.util.EntityUtils
+import org.json.JSONObject
 import org.sh.utils.json.JSONUtil
 
 import scala.xml.XML
@@ -24,6 +25,7 @@ object Curl {
 
   val get = "GET"
   val post = "POST"
+  val postJson = "POSTJSON"
 
   def curl(
     url     : String, 
@@ -35,9 +37,8 @@ object Curl {
     /*
      * https://hc.apache.org/httpcomponents-client-ga/quickstart.html
      * https://stackoverflow.com/a/30207433/243233
-     * 
+     *
      */
-    if (debug) println(Console.YELLOW+" [CURL] "+Console.RESET+s"USING NEW CURL FOR $url")
     val http = reqType match {
       case `get` => 
         val charset = "UTF-8";
@@ -52,7 +53,17 @@ object Curl {
           case (name, value) =>
             nvps.add(new BasicNameValuePair(name, value));
         }
-        httpPost.setEntity(new UrlEncodedFormEntity(nvps));          
+        httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+        httpPost
+      case `postJson` =>
+        // https://stackoverflow.com/a/53121160/243233
+        val httpPost = new HttpPost(url);
+        val payload = new JSONObject
+        params.foreach{
+          case (k, v) => payload.put(k, v)
+        }
+        val entity = new StringEntity(payload.toString(), ContentType.APPLICATION_JSON)
+        httpPost.setEntity(entity);
         httpPost
       case any => throw new Exception(s"Unsupported req type $any")
     }
@@ -103,9 +114,29 @@ object Curl {
   def queryXML(url:String) = JSONUtil.jsonStringToXML(query(url))
   def queryXML(url:String, headers:Array[(String, String)]) = JSONUtil.jsonStringToXML(query(url, headers))
   def queryDirectXML(url:String) = XML.loadString(query(url))
-}
 
+  // curl -X POST "http://localhost:9052/wallet/init" -H "accept: application/json" -H "api_key: hello"  -H "Content-Type: application/json" -d "{\"pass\":\"hello\",\"mnemonicPass\":\"hello\"}"
+
+}
+/*
+When sending data via a POST or PUT request, two common formats (specified via the Content-Type header) are:
+
+application/json
+application/x-www-form-urlencoded
+
+the json format requires a bunch of extra quoting
+curl will send form urlencoded by default, so for json the Content-Type header must be explicitly set
+
+The above object (Curl) initially only supported the x-www-form-urlencoded format. To use json, below class was written.
+However, a new request type, PostJson has been created (09 Jun 2019) to handle the Json case in the above class itself.
+
+After testing the above, the below class should be deleted.
+
+ */
+@deprecated("Added JSON data type for Curl object. Delete below object after testing above", "09 June 2019")
 object CurlJsonData {
+  // Used for making POST requests only
+
   // https://stackoverflow.com/questions/12059278/how-to-post-json-request-using-apache-httpclient
   // https://stackoverflow.com/questions/13743205/how-to-add-set-and-get-header-in-request-of-httpclient
   def curl(url:String, jsonEncodedString:String) = {
@@ -124,7 +155,6 @@ object CurlJsonData {
           }
         }
         EntityUtils.consume(entity)
-        //println("ANSWER -> "+answer)
         answer
       }
     }
