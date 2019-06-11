@@ -26,14 +26,15 @@ object Curl {
   val get = "GET"
   val post = "POST"
   val postJson = "POSTJSON"
+  val postJsonRaw = "POSTJSONRAW"
 
   def curl(
     url     : String, 
-    headers : Array[(String, String)], 
+    headers : Seq[(String, String)],
     reqType : String, 
-    params  : Array[(String, String)],
-    userAgent: String=defaultUserAgent
-  ):String = {
+    params  : Seq[(String, String)],
+    userAgent: String = defaultUserAgent
+  )(data:Option[String] = None):String = {
     /*
      * https://hc.apache.org/httpcomponents-client-ga/quickstart.html
      * https://stackoverflow.com/a/30207433/243233
@@ -55,7 +56,7 @@ object Curl {
         }
         httpPost.setEntity(new UrlEncodedFormEntity(nvps));
         httpPost
-      case `postJson` =>
+      case `postJson` => // params as key-value pairs
         // https://stackoverflow.com/a/53121160/243233
         val httpPost = new HttpPost(url);
         val payload = new JSONObject
@@ -63,6 +64,13 @@ object Curl {
           case (k, v) => payload.put(k, v)
         }
         val entity = new StringEntity(payload.toString(), ContentType.APPLICATION_JSON)
+        httpPost.setEntity(entity);
+        httpPost
+      case `postJsonRaw` =>
+        val httpPost = new HttpPost(url);
+        val rawJsonData = data.get // first objects value
+        val payload = s""""$rawJsonData""""
+        val entity = new StringEntity(payload, ContentType.APPLICATION_JSON)
         httpPost.setEntity(entity);
         httpPost
       case any => throw new Exception(s"Unsupported req type $any")
@@ -91,28 +99,28 @@ object Curl {
   }
 
   // wrapper 1 around main curl
-  def curl(url:String, headers:Array[(String, String)], reqType:String):String =
-      curl(url, headers, reqType, Array[(String, String)]())
+  def curl(url:String, headers:Seq[(String, String)], reqType:String):String =
+      curl(url, headers, reqType, Nil)(None)
 
   // wrapper 2 around wrapper 1
-  def curl(url:String, headers:Array[(String, String)]):String =
+  def curl(url:String, headers:Seq[(String, String)]):String =
       curl(url, headers, get)
 
   // wrapper 3 around wrapper 2
   def curl(url:String):String = 
-      curl(url, Array[(String, String)]())
+      curl(url, Nil)
   
   // wrapper 4 around wrapper 3
-  def query(url:String, headers:Array[(String, String)]):String =
+  def query(url:String, headers:Seq[(String, String)]):String =
       curl(url, headers)
 
   // wrapper 5 around wrapper 4
   def query(url:String):String =
-      query(url,Array[(String, String)]())
+      query(url, Nil)
 
   // wrapper 6 around wrapper 5
   def queryXML(url:String) = JSONUtil.jsonStringToXML(query(url))
-  def queryXML(url:String, headers:Array[(String, String)]) = JSONUtil.jsonStringToXML(query(url, headers))
+  def queryXML(url:String, headers:Seq[(String, String)]) = JSONUtil.jsonStringToXML(query(url, headers))
   def queryDirectXML(url:String) = XML.loadString(query(url))
 
   // curl -X POST "http://localhost:9052/wallet/init" -H "accept: application/json" -H "api_key: hello"  -H "Content-Type: application/json" -d "{\"pass\":\"hello\",\"mnemonicPass\":\"hello\"}"
@@ -133,7 +141,7 @@ However, a new request type, PostJson has been created (09 Jun 2019) to handle t
 After testing the above, the below class should be deleted.
 
  */
-@deprecated("Added JSON data type for Curl object. Delete below object after testing above", "09 June 2019")
+@deprecated("Added JSON data type for 'Curl' object. Will be deleted after testing the 'Curl' object", "09 June 2019")
 object CurlJsonData {
   // Used for making POST requests only
 

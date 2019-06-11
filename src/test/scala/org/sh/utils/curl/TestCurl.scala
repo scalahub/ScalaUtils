@@ -3,8 +3,8 @@ package org.sh.utils.curl
 import Curl._
 
 object TestCurl extends App {
-  type Headers = Array[(String, String)]
-  type Params = Array[(String, String)]
+  type Headers = Seq[(String, String)]
+  type Params = Seq[(String, String)]
 
   case class ReqType(text:String)
   object Post extends ReqType(post)
@@ -16,7 +16,7 @@ object TestCurl extends App {
 
   val tvs = Seq(
     TestVector(
-      "https://postman-echo.com/get", Array(), Get,
+      "https://postman-echo.com/get", Nil, Get,
       Array(
         ("foo1", "bar1"),
         ("foo2", "bar2")
@@ -24,7 +24,7 @@ object TestCurl extends App {
       """{"args":{"foo1":"bar1","foo2":"bar2"},"headers":{"x-forwarded-proto":"https","host":"postman-echo.com","accept-encoding":"gzip,deflate","user-agent":"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1","x-forwarded-port":"443"},"url":"https://postman-echo.com/get?foo1=bar1&foo2=bar2"}""".stripMargin.trim
     ),
     TestVector(
-      "https://postman-echo.com/post", Array(), Post,
+      "https://postman-echo.com/post", Nil, Post,
       Array(
         ("foo1", "bar1"),
         ("foo2", "bar2")
@@ -32,7 +32,7 @@ object TestCurl extends App {
       """{"args":{},"data":"","files":{},"form":{"foo1":"bar1","foo2":"bar2"},"headers":{"x-forwarded-proto":"https","host":"postman-echo.com","content-length":"19","accept-encoding":"gzip,deflate","content-type":"application/x-www-form-urlencoded","user-agent":"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1","x-forwarded-port":"443"},"json":{"foo1":"bar1","foo2":"bar2"},"url":"https://postman-echo.com/post"}"""
     ),
     TestVector(
-      "https://postman-echo.com/post", Array(), PostJson,
+      "https://postman-echo.com/post", Nil, PostJson,
       Array(
         ("foo1", "bar1"),
         ("foo2", "bar2")
@@ -43,7 +43,7 @@ object TestCurl extends App {
 
   tvs.foreach{
     case TestVector(url, headers, reqType, params, expected) =>
-      val actual = curl(url, headers, reqType.text, params)
+      val actual = curl(url, headers, reqType.text, params)(None)
       assert(actual == expected, s"Expected:\n $expected.\nActual:\n $actual")
   }
 }
