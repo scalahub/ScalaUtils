@@ -87,7 +87,9 @@ object Util {
   def getAllFiles(dir:String, extensions:Array[String], recursive:Boolean) = try {
     FileUtils.listFiles(new File(dir), extensions, recursive).toArray.map(_.toString)
   } catch {
-    case _ : Throwable => Array[String]()
+    case any : Throwable =>
+      any.printStackTrace()
+      Array[String]()
   }
   def readBinaryFileToString(fileName:String) = new String(readBinaryFileToBytes(fileName))
 
