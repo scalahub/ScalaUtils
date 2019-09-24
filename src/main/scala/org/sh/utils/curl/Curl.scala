@@ -69,7 +69,10 @@ object Curl {
       case `postJsonRaw` =>
         val httpPost = new HttpPost(url);
         val rawJsonData = data.get // first objects value
-        val payload = s""""$rawJsonData""""
+        //val payload = s""""$rawJsonData""""
+        println("raw "+rawJsonData)
+        val payload = rawJsonData
+
         val entity = new StringEntity(payload, ContentType.APPLICATION_JSON)
         httpPost.setEntity(entity);
         httpPost
