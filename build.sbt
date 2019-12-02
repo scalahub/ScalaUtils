@@ -2,7 +2,7 @@ name := "ScalaUtils"
 
 version := "0.1"
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.13.1"
 
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.5.8"
 
@@ -14,7 +14,6 @@ libraryDependencies += "commons-codec" % "commons-codec" % "1.12"
 libraryDependencies += "commons-io" % "commons-io" % "2.6"
 
 // https://mvnrepository.com/artifact/org.json/json
-// libraryDependencies += "org.json" % "json" % "20180813"
 libraryDependencies += "org.json" % "json" % "20140107"
 
 // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
