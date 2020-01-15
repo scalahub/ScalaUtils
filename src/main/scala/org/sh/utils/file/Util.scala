@@ -78,7 +78,7 @@ object Util {
     case _ : Throwable => ""
   }
   def readInputStreamToBytes(is:InputStream) =
-    Stream.continually(is.read).takeWhile(-1 !=).map(_.toByte).toArray
+    Stream.continually(is.read).takeWhile(-1.!=).map(_.toByte).toArray
   def readBinaryFileToBytes(fileName:String) = 
     using (new BufferedInputStream(new FileInputStream(fileName))) {
       bis => readInputStreamToBytes(bis) //Stream.continually(bis.read).takeWhile(-1 !=).map(_.toByte).toArray

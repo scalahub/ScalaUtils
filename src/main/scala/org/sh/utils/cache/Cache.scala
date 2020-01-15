@@ -2,7 +2,9 @@ package org.sh.utils.cache
 
 import scala.util.Random._
 import org.sh.utils.Util._
+
 import scala.collection.immutable.TreeMap
+import scala.reflect.ClassTag
 //import scala.collection.mutable.{Map => MMap}  
 //import scala.collection.immutable.{Map => MMap}  
 
@@ -32,7 +34,7 @@ class ListCache[
 ](cacheSize:Int, 
   cachingEnabled:Boolean, 
   getItemsFromDB:GetItemsFromDB[PriKey, T], preventDuplicateIDs:Boolean)(
-  implicit ev: ¬¬[ID] <:< (String ∨ Long)) extends Cache[PriKey, ID, T](cacheSize, cachingEnabled, preventDuplicateIDs) {
+  implicit ev: ¬¬[ID] <:< (String ∨ Long), c: ClassTag[T]) extends Cache[PriKey, ID, T](cacheSize, cachingEnabled, preventDuplicateIDs) {
   
   private def loadUserItems(priKey:PriKey) = {
     if (cachingEnabled) {
@@ -141,7 +143,7 @@ class ItemCache[
 ](cacheSize:Int, 
   cachingEnabled:Boolean, 
   getData:GetItemFromDB[ID, PriKey, T], preventDuplicateIDs:Boolean)(
-  implicit ev: ¬¬[ID] <:< (String ∨ Long)) extends Cache[PriKey, ID, T](cacheSize, cachingEnabled, preventDuplicateIDs) {
+  implicit ev: ¬¬[ID] <:< (String ∨ Long), c: ClassTag[T]) extends Cache[PriKey, ID, T](cacheSize, cachingEnabled, preventDuplicateIDs) {
   
   private def loadUserItem(priKey:PriKey, id:ID) = {
     if (cachingEnabled) {
@@ -173,7 +175,7 @@ class ItemCache[
 }
 abstract class Cache[
   PriKey, ID, T <: Item[ID]
-](var cacheSize:Int, var cachingEnabled:Boolean, preventDuplicateIDs:Boolean)(implicit ev: ¬¬[ID] <:< (String ∨ Long)) {
+](var cacheSize:Int, var cachingEnabled:Boolean, preventDuplicateIDs:Boolean)(implicit ev: ¬¬[ID] <:< (String ∨ Long), c: ClassTag[T]) {
   
   protected var itemMap:ItemMap[PriKey, T] = Map() 
   protected var accessMap:Map[PriKey, Time] = Map()
@@ -250,7 +252,14 @@ abstract class Cache[
   def getCachedItemsByDate(priKey:PriKey, from:Time, to:Time, max:Int, offset:Long):Option[List[T]] = { // does not load if cache is empty
     itemMap.get(priKey).map{treeMap =>
       accessMap += (priKey -> getTime)
-      treeMap.filterKeys(k => k <= to && k >= from).toArray.sortBy(x => -x._1).flatMap(_._2).drop(offset.toInt).take(max).toList
+      val x: Array[(Time, List[T])] = treeMap.filterKeys(k => k <= to && k >= from).toArray.sortBy(
+        x => -x._1
+      )
+      x.flatMap(
+        x => x._2
+      ).drop(
+        offset.toInt
+      ).take(max).toList
       // treeMap.filterKeys(k => k <= to && k >= from).values.flatten.drop(offset.toInt).take(max).toList.reverse
     }
   }

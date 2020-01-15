@@ -6,7 +6,8 @@ import org.json.JSONObject
 import org.json.JSONTokener
 import org.sh.utils.Util
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
+
 object JSONUtil {
   def decodeJSONArray(jsonString:String) = {
     val ja = new JSONArray(jsonString)
@@ -14,7 +15,7 @@ object JSONUtil {
   }
   def getJSONKeys(jsonString:String) = try {
     val jo = new JSONTokener(jsonString).nextValue().asInstanceOf[JSONObject];
-    jo.keys.map(_.toString).toList
+    jo.keys.asScala.map(_.toString).toList
   } catch {
     case e:Throwable => if (Util.debug) println(" [JSON] error with: "+jsonString)
       throw e
@@ -35,20 +36,6 @@ object JSONUtil {
     }
     jo
   }
-  //  def createJSONObject(keys:Array[String], vals:Array[_]) = {
-  //    val jo = new JSONObject
-  //    keys.indices.foreach{i => 
-  //      
-  //      val value = vals.apply(i) match {
-  //        //case a:Set[_] => a.map(_.toString).toArray
-  //        case any:AnyRef => org.sh.utils.Util.serialize(any)
-  //        case any => any
-  //      }
-  //      
-  //      jo.put(keys.apply(i), value)
-  //    }
-  //    jo
-  //  }
 
   def jsonStringToXML(s:String) = try scala.xml.XML.loadString("<JSON>"+org.json.XML.toString(new JSONObject(s))+"</JSON>") catch {
     case e:Any =>

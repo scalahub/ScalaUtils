@@ -5,7 +5,8 @@ import java.io.File
 
 import org.sh.utils.file.prop.PropDataStructures.PropVal
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
+
 import org.sh.utils.file.prop.{GlobalEncryptorDecryptor, TraitCommonFilePropReader}
 import org.sh.utils.file.{EncryptedFileProperties, TraitPlaintextFileProperties}
 
@@ -40,7 +41,7 @@ object EncPropUtil {
   def getProps(pr:TraitCommonFilePropReader) = {
     pr.initialize//    val dummy = pr.read("dummy", "dummy") // read something to load data
     val p = pr.props
-    p.keys.map{ k =>
+    p.keys.asScala.map{ k =>
       val key = k.asInstanceOf[String]
       PropVal(key, p.get(key))
     }.toArray.filterNot(_.key == encrTagKey)    

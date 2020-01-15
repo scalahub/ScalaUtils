@@ -27,7 +27,7 @@ object TaskScheduler {
   
   def doOnce(fn: => Unit, period:Long) = {
     val id = ctr.getAndIncrement
-    val cancellable = scheduler.scheduleOnce(period milliseconds){
+    val cancellable = scheduler.scheduleOnce(period.milliseconds){
       scheduledTasks.synchronized{scheduledTasks -= id}
       fn
     }
@@ -35,7 +35,7 @@ object TaskScheduler {
     cancellable
   }
   def doRegularly(fn: => Unit, periodMillis:Long) = {
-    val cancellable = scheduler.schedule(0 seconds, periodMillis milliseconds)(fn)
+    val cancellable = scheduler.schedule(0.seconds, periodMillis.milliseconds)(fn)
     scheduledTasks += ctr.getAndIncrement -> cancellable
     cancellable
   }
