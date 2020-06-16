@@ -28,7 +28,7 @@ object JSONUtil {
   }
   def encodeJSONSeq(s:Seq[_]) = encodeJSONArray(s.toArray)
   def encodeJSONArray(a:Array[_]) = new JSONArray(a)
-  def createJSONString(keys:Array[String], vals:Array[_]) = createJSONObject(keys, vals).toString
+  def createJSONString(keys:Array[String], vals:Array[_]) = createJSONObject(keys, vals).toString(2)
   def createJSONObject(keys:Array[String], vals:Array[_]) = {
     val jo = new JSONObject
     keys.indices.foreach{i => 
