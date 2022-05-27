@@ -1,5 +1,7 @@
 name := "ScalaUtils"
 
+ThisBuild / version := "1.0"
+
 libraryDependencies += "org.scala-lang.modules" %% "scala-collection-compat" % "2.1.4"
 
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.6.0-M5"
